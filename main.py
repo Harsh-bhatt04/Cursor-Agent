@@ -9,7 +9,9 @@ def main():
     response = graph.invoke(
         {
             "messages": [
-                HumanMessage(content="What files are present inside the app folder?")
+                HumanMessage(
+    content="Create a file named \"notes.txt\" and write \"Hello World\" into it."
+)
             ]
         }
     )

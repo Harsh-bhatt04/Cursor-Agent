@@ -31,3 +31,13 @@ def list_files(directory: str) -> str:
         f"Folders:\n" + ("\n".join(directories) or "None") +
         f"\n\nFiles:\n" + ("\n".join(files) or "None")
     )
+
+
+@tool
+def write_file(file_path: str, content: str) -> str:
+    """Write content to a file."""
+
+    path = Path(file_path)
+    path.write_text(content)
+
+    return f"Successfully wrote to {file_path}"
