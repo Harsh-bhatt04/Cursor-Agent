@@ -3,12 +3,20 @@ from langchain.chat_models import init_chat_model
 from app.state import AgentState
 from app.tools.math_tools import add
 from app.tools.file_tools import read_file
-from app.tools.file_tools import list_files,write_file
+from app.tools.file_tools import list_files,write_file,search_files
 
 
 load_dotenv()
 
-llm = init_chat_model("google_genai:gemini-3.5-flash").bind_tools([add,read_file,list_files,write_file])
+llm = init_chat_model("google_genai:gemini-3.5-flash").bind_tools(
+    [
+        add,
+        read_file,
+        list_files,
+        write_file,
+        search_files
+    ]
+)
 
 
 

@@ -1,5 +1,5 @@
+import fnmatch
 from pathlib import Path
-
 from langchain_core.tools import tool
 
 
@@ -41,3 +41,23 @@ def write_file(file_path: str, content: str) -> str:
     path.write_text(content)
 
     return f"Successfully wrote to {file_path}"
+
+
+@tool
+def search_files(directory: str, pattern: str) -> list[str]:
+    """
+    Search for files recursively matching a pattern.
+
+    Example patterns:
+    *.py
+    *.md
+    *.json
+    """
+
+    matches = []
+
+    for file in Path(directory).rglob("*"):
+        if file.is_file() and fnmatch.fnmatch(file.name, pattern):
+            matches.append(str(file))
+
+    return matches

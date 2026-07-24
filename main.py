@@ -10,7 +10,7 @@ def main():
         {
             "messages": [
                 HumanMessage(
-    content="Create a file named \"notes.txt\" and write \"Hello World\" into it."
+    content="Find every Python file inside this project."
 )
             ]
         }
