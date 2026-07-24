@@ -10,7 +10,7 @@ def main():
         {
             "messages": [
                 HumanMessage(
-    content="Find every Python file inside this project."
+    content="Find every .txt file inside this project. exclude .venv folder"
 )
             ]
         }
