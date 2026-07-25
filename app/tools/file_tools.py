@@ -1,3 +1,4 @@
+import os
 import fnmatch
 from pathlib import Path
 from langchain_core.tools import tool
@@ -61,3 +62,50 @@ def search_files(directory: str, pattern: str) -> list[str]:
             matches.append(str(file))
 
     return matches
+
+
+@tool
+def search_text(directory: str, text: str) -> list[str]:
+    """
+    Search for text recursively in all project files.
+    """
+
+    matches = []
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            path = Path(root) / file
+
+            try:
+                content = path.read_text()
+
+                if text in content:
+                    matches.append(str(path))
+
+            except Exception:
+                continue
+
+    return matches
+
+
+@tool
+def edit_file(file_path: str, old_text: str, new_text: str) -> str:
+    """
+    Replace old_text with new_text inside a file.
+    """
+
+    path = Path(file_path)
+
+    if not path.exists():
+        return f"{file_path} does not exist."
+
+    content = path.read_text(encoding="utf-8")
+
+    if old_text not in content:
+        return f'"{old_text}" was not found in {file_path}.'
+
+    updated_content = content.replace(old_text, new_text)
+
+    path.write_text(updated_content, encoding="utf-8")
+
+    return f"Successfully updated {file_path}"

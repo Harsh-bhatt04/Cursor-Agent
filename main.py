@@ -10,7 +10,7 @@ def main():
         {
             "messages": [
                 HumanMessage(
-    content="Find every .txt file inside this project. exclude .venv folder"
+    content="Update the contents of notes.txt by replacing the text Hello World with Agentic AI."
 )
             ]
         }
